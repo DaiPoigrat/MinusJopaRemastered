@@ -16,7 +16,6 @@ class Test (App):
 		self.port = 0
 		self.adress = ''
 		self.server = (self.adress, 9090)
-
 		self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.s.bind((self.host, self.port))
 		self.s.setblocking(0)
@@ -33,20 +32,18 @@ class Test (App):
 
 	def Click(self, instance):
 		self.s.sendto((instance.text).encode("utf-8"), self.server)
-		print(instance.text)
 
 
 	def client_on(self, instance): #чисто на проверо4ку
-		print(instance.text)
 		self.adress = self.ip.text
 		self.server = (str(self.adress), 9090)
 		self.s.sendto(("connected").encode("utf-8"), self.server)
 
 
 	def client_off(self, instance):
-		print(instance.text)
 		self.s.sendto(("disconnected").encode("utf-8"), self.server)
 		self.s.close()
 
 
-Test().run()
+if __name__ == '__main__':
+	Test().run()
